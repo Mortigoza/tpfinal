@@ -1,0 +1,156 @@
+-- NIVELES --
+CREATE TABLE if not exists Nivel (
+    id_nivel int PRIMARY KEY,
+    nombre_nivel varchar(255)
+  
+);
+
+-- CAPITULOS --
+create table if not exists capitulos(
+    id_capitulo int auto_increment,
+    numero_capitulo int not null unique,
+    nombre_capitulo varchar(50) not null,
+    primary key(id_capitulo));
+    
+
+-- USUARIOS --
+CREATE table if not exists Usuario(
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario varchar(50) UNIQUE,
+    contrasenia varchar(10),
+    nombre varchar(50),
+    apellido varchar(50),
+    fecha_nacimiento date,
+    email varchar(100) UNIQUE,
+    telefono varchar(30));
+    
+-- CONCEPTOS --
+CREATE TABLE if not exists Conceptos (
+    id_concepto int auto_increment, 
+    nombre_concepto varchar(50),
+    numero_concepto int,
+    contenido_concepto LONGTEXT,
+    PRIMARY key(id_concepto)
+);
+
+-- PREGUNTAS --
+CREATE TABLE if not exists Preguntas (
+    id_pregunta int PRIMARY key auto_increment,
+    contenido_pregunta varchar(255) not null);
+    
+-- RESPUESTAS --
+CREATE TABLE if not exists Respuestas (
+    id_respuesta int PRIMARY key auto_increment,
+    contenido_respuestas varchar(255) not null,
+    es_correcta boolean not null);
+    
+-- EJEMPLOS --
+CREATE TABLE if not exists Ejemplos (
+    id_ejemplos int PRIMARY key auto_increment,
+    contenido_ejemplo varchar(255),
+    descripcion_ejemplo varchar(255));
+    
+describe nivel;
+select * from Nivel;
+
+INSERT INTO Nivel values (1, 'Básico');
+INSERT INTO Nivel values (2, 'Medio');
+INSERT INTO Nivel values (3, 'Avanzado');
+
+
+INSERT INTO capitulos values (1, 1, 'Crear objetos', 1);
+describe capitulos;
+select * from capitulos;
+
+INSERT INTO Conceptos VALUES (1, 'Constructores', 1, 1, 'Para crear una instancia de una clase, todo lo que tenés que hacer es
+escribir "new" después de ella. Primero declarás el tipo de variable que vas a estar creando
+y luego el nombre que le vas a asignar a dicha variable. Esto le da a Java un lugar para almacenar
+la referencia al objeto. Luego escribís "new" tipo_de_la_variable() para crear el objeto. tipo_de_la_variable()
+se ve como un método ya que está seguido por paréntesis. Se lo llama CONSTRUCTOR y es un tipo de método
+especial que crea un nuevo objeto. Hay dos puntos especiales que destacar de los Constructores: El nombre coincide
+con el de la clase y no tiene tipo de retorno. El propósito de un constructor es inicializar campos. Para la mayoría
+de las clases no necesitás crear un constructor, el compilador lo hace por vos.');
+
+INSERT INTO Conceptos (nombre_concepto, id_capitulo, numero_concepto, contenido_concepto) values ('Leyendo y escribiendo los campos de un objeto', 1, 2, 'Leer una variable se conoce como obtenerla.
+Escribir en una variable se conoce como configurarla. Incluso se puedem leer y escribir campos directamente
+en la línea que los declara.');
+
+INSERT INTO Conceptos (nombre_concepto, id_capitulo, numero_concepto, contenido_concepto) values ('Bloques inicializadores de instancias', 1, 3, 'A veces los bloques de código están dentro de métodos y son ejecutados cuando el
+método es llamado. Otras veces, los bloques de código están por fuera de ellos. Estos se denominan
+INICIALIZADORES DE INSTANCIAS. ');
+
+INSERT INTO Conceptos (nombre_concepto, id_capitulo, numero_concepto, contenido_concepto) values ('Orden de inicialización', 1, 4, 'Los campos y los bloques inicializadores de
+instancias se ejecutan en el orden en el que aparecen en el archivo.');
+
+describe conceptos;
+select * from tp_final.conceptos;
+
+INSERT INTO preguntas values (1, '¿Cuál de estas dos opciones es un método constructor? A: public
+Chick() {System.out.println("in constructor");} /// B: public void Chick() { }.', 1);
+
+INSERT INTO preguntas VALUES (2, '¿En cuál de los siguientes casos se está sólo escribiendo una variable? A:
+String first = "Theodore"; /// B: String full = first + last;', 2);
+
+INSERT INTO preguntas VALUES (3, '¿Cuántos inicializadores de instancia hay en el siguiente ejemplo?
+3: public static void main(String[] args) {
+4: { System.out.println("Feathers"); }
+5: }
+6: { System.out.println("Snowy"); }
+', 3);
+
+INSERT INTO preguntas VALUES (4, '¿Qué imprimirá este
+código?
+public class Egg { public Egg() {number = 5;}
+ public static void main(String[] args) {Egg egg = new Egg(); System.out.println(egg.number);}
+ private int number = 3;
+ { number = 4; } }', 4);
+
+
+select * from preguntas;
+describe preguntas;
+
+INSERT INTO respuestas VALUES (1, 'A', 1, 1);
+INSERT INTO respuestas VALUES (2, 'A', 1, 2);
+INSERT INTO respuestas VALUES (3, 'Uno', 1, 3);
+INSERT INTO respuestas VALUES (4, '5', 1, 4);
+
+select * from respuestas;
+describe respuestas;
+
+INSERT INTO ejemplos VALUES (1, 'public class Chick {private String name = "Fluffy";
+{ SOUT("field"); } public Chick() { name = "T"; System.out.println("setting constructor"); } public static void main(String[] args) { Chick chick = new Chick(); System.out.println(chick.name); }', 'Running this example prints this: field setting constructor T', 4);
+
+INSERT INTO ejemplos VALUES (2, '3: public static void main(String[] args) {
+4: { System.out.println("Feathers"); }
+5: }
+6: { System.out.println("Snowy"); }', 'La última línea es una instancia inicializadora', 3);
+
+INSERT INTO ejemplos VALUES (3, '1: public class Name {
+2: String first = "Theodore";
+3: String last = "Moose";
+4: String full = first + last;
+5: {', 'La línea 2 y 3 escriben campos, la 4 escribe y lee a la vez.', 2);
+
+INSERT INTO ejemplos VALUES (4, 'public Chicken() {
+ name = "Duke";// initialize in constructor', '...', 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
